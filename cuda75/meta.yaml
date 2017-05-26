@@ -1,0 +1,14 @@
+package:
+  name: cuda75
+  version: 1.0
+
+build:
+  track_features:
+    - cuda75
+
+extra:
+  upload: cuda75
+  force_upload: False
+
+about:
+  summary: Metapackage indicating CUDA75 is installed

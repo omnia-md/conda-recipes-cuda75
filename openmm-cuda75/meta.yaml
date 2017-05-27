@@ -38,7 +38,8 @@ requirements:
     - lxml
     - numpy
     # Get clang from conda-forge for linux only
-    - clangdev ==3.8.1 [linux]
+    #- clangdev ==3.8.1 [linux]
+    - clangdev [linux]
 
   run:
     - python

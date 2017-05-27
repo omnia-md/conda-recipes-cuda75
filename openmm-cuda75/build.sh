@@ -12,7 +12,7 @@ if [[ "$OSTYPE" == "linux-gnu" ]]; then
     # For Docker build
     #
 
-    export LD_LIBRARY_PATH="/opt/rh/devtoolset-2/root/usr/lib64:/opt/rh/devtoolset-2/root/usr/lib:$LD_LIBRARY_PATH"
+    #export LD_LIBRARY_PATH="/opt/rh/devtoolset-2/root/usr/lib64:/opt/rh/devtoolset-2/root/usr/lib:$LD_LIBRARY_PATH"
 
     # CFLAGS
     export MINIMAL_CFLAGS="-g -O3"

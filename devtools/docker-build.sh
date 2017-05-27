@@ -1,6 +1,10 @@
 #!/bin/bash
 set -e
 set -x
+
+# Activate devtools
+source /opt/docker/bin/entrypoint
+
 conda config --add channels omnia
 # Move the conda-forge channel to the top
 # Cannot just append omnia otherwise default would have higher priority

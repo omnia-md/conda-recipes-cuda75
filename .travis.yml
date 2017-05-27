@@ -2,8 +2,7 @@ os:
   - linux
   - osx
 
-# Supported osx/xcode versions: https://docs.travis-ci.com/user/languages/objective-c/#Supported-Xcode-versions
-# See also: https://blog.travis-ci.com/2016-10-04-osx-73-default-image-live/
+# Supported versions: https://docs.travis-ci.com/user/languages/objective-c/#Supported-Xcode-versions
 osx_image: xcode6.4
 
 language: c
@@ -13,6 +12,10 @@ services:
   - docker
 
 env:
+  matrix:
+    - PY_BUILD_VERSION="27"
+    - PY_BUILD_VERSION="35"
+    - PY_BUILD_VERSION="36"
   global:
     - CUDA_VERSION: "7.5"
     - CUDA_SHORT_VERSION: "75"
@@ -20,27 +23,30 @@ env:
     - "TIpKBHi/wpdO0TmUNzhFDUmTSIiUgI+UrP1AyvT1ujQUXQ1I0rKQdPEbVEL9a+p8q/aYay/n3DQg0i5IgUj9Qhvt0lXurfuVooe1LL7kHOQ5ReygAMWCYfQgFQfZN0SkyhvQx4cqZ5hHIAT9vm8aYJ247DHVCLh3GQUus/2OI9sW0J6xztkAw5LS4CstGbAjSfLIcWkxWsP9MCxFfu3tyojJdMOy4lSAhraE8JqS0E+3OmZWwKMbhhutC66EWUVqenKj9jUcpYNSFZly2YG7njOHqaV0U8CIRxdSPj7COPzWjmV/eJRGzkh2HGkYtvtlaD1rgHZejA23Ak7n7nkTvlpq+IEPB0/3g+kl6J7xXMj0GwPCn0dvxUhMBsgL51zWfloRW/VQzhI0H/Mx7P5wndf/3PJrVx1+sNVWZxX3Pa+vkt0bdJC1Bo0LL2e81PojKi9zU3Erfu42b5JQ8ri4+INnZXiKxOHBpVOwee/LGGvtyT0bSjYGn1cOqvYnqDnzVHwlwopNehoxaZ43CGpeq7NEmUzJKVS1yfKfWwOpeMOqFevdbdr87LpMd+VTOmOXNX4yQ+AkVKcBX/e9OaArKqB8Lknvb8hJWJvhwMSdgDHj5zrtA+N+MW1jUQ/yXMYvv0l4H9rJH9roKlzUnsw6EzZmaot0FNsHhvA1sGNWNrk="
 
 install:
-  # The Dockerfile that defines the image that for the build environment is
-  # available in this repo at devtools/omnia-build-box/Dockerfile
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
       docker pull jchodera/omnia-linux-anvil:texlive-amd30-cuda${CUDA_SHORT_VERSION};
     fi
 
 script:
+  # Retrieve conda-build-all
+  - wget -O conda-build-all --quiet https://raw.githubusercontent.com/omnia-md/conda-recipes/master/conda-build-all
+  - chmod u+x conda-build-all
+  # Select upload destination
   - if [[ "${TRAVIS_PULL_REQUEST}" == "false" && "${TRAVIS_BRANCH}" == "master" ]]; then
-        export UPLOAD="--upload omnia";
+        export UPLOAD="--upload omnia --dev --force";
     else
-        export UPLOAD=" ";
+        export UPLOAD="--dev --force";
     fi
   - echo $UPLOAD
-
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
 
-        docker run -e UPLOAD -e BINSTAR_TOKEN -e TRAVIS_PULL_REQUEST
+        docker run -e UPLOAD -e BINSTAR_TOKEN -e TRAVIS_PULL_REQUEST -e PY_BUILD_VERSION
             -t -i --rm -v `pwd`:/io jchodera/omnia-linux-anvil:texlive-amd30-cuda${CUDA_SHORT_VERSION}
             bash /io/devtools/docker-build.sh;
 
     elif [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
+
         echo "Building osx...";
         bash devtools/osx-build.sh;
+
     fi

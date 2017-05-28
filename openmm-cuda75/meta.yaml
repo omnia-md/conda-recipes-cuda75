@@ -15,8 +15,8 @@ build:
     - cuda75
 
 extra:
-  upload: cuda75
-  force_upload: False
+  upload: rc
+  force_upload: True
 
 requirements:
   build:

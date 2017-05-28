@@ -10,7 +10,7 @@ conda config --add channels omnia/label/cuda75
 # Move the conda-forge channel to the top
 # Cannot just append omnia otherwise default would have higher priority
 conda config --add channels conda-forge
-conda install -yq conda\>=4.3 conda-build jinja2 anaconda-client
+conda install -yq conda\>=4.3 conda-build=2.1.5 jinja2 anaconda-client
 
 #/io/conda-build-all -vvv --python $PY_BUILD_VERSION $UPLOAD -- /io/cuda75
 conda install -yq cuda75

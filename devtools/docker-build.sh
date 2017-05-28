@@ -12,6 +12,8 @@ conda config --add channels omnia/label/cuda75
 conda config --add channels conda-forge
 conda install -yq conda\>=4.3 conda-build jinja2 anaconda-client
 
-/io/conda-build-all -vvv --python $PY_BUILD_VERSION $UPLOAD -- /io/*
+/io/conda-build-all -vvv --python $PY_BUILD_VERSION $UPLOAD -- /io/cuda75
+conda install -yq cuda75
+/io/conda-build-all -vvv --python $PY_BUILD_VERSION $UPLOAD -- /io/openmm-cuda75
 
 #mv /anaconda/conda-bld/linux-64/*tar.bz2 /io/ || true

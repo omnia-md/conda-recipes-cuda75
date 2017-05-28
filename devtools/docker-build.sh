@@ -6,7 +6,7 @@ set -x
 source /opt/docker/bin/entrypoint
 
 conda config --add channels omnia
-conda config --add channels omnia/labels/cuda75
+conda config --add channels omnia/label/cuda75
 # Move the conda-forge channel to the top
 # Cannot just append omnia otherwise default would have higher priority
 conda config --add channels conda-forge

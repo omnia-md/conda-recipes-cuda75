@@ -7,7 +7,7 @@ build:
     - cuda75
 
 extra:
-  upload: rc
+  upload: cuda75
   force_upload: True
 
 about:

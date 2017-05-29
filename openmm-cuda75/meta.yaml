@@ -11,11 +11,11 @@ source:
 build:
   number: 0
   skip: True # [win]
-  features:
-    - cuda75
+  #features:
+  #  - cuda75
 
 extra:
-  upload: rc
+  upload: cuda75
   force_upload: True
 
 requirements:

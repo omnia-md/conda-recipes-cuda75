@@ -13,7 +13,11 @@ build:
   skip: True # [win]
   #features:
   #  - cuda75
-
+  patches:
+    - silent-cmake.patch
+    - silent-doxygen.patch
+    - silent-latexpdf.patch
+    
 extra:
   upload: dev
   force_upload: True

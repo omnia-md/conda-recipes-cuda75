@@ -1,11 +1,10 @@
 package:
   name: openmm-cuda75
-  version: 7.3.0
-  #version: 7.1.1
+  version: 7.2.1
 
 source:
   git_url: https://github.com/pandegroup/openmm.git
-  #git_tag: c1a64aa
+  git_rev: 7.2.1
 
 
 build:
@@ -18,9 +17,9 @@ build:
     - silent-doxygen.patch
     - silent-latexpdf.patch
     
-extra:
-  upload: dev
-  force_upload: True
+#extra:
+#  upload: dev
+#  force_upload: True
 
 requirements:
   build:
